@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+
 #define DONE 0
 
 int main() {
@@ -55,7 +56,7 @@ int main() {
         // Read message from server
         memset(buffer, 0, sizeof(buffer)); // Clear buffer
         recv(sock, buffer, sizeof(buffer), 0);
-        std::cout << "Message from server: " << buffer << std::endl;
+        std::cout << "Server > " << buffer << std::endl;
     }
 
     std::cout << "Client closing..." << std::endl;

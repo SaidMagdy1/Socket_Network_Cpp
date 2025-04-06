@@ -17,7 +17,7 @@ int main(){
     int listening;
     struct sockaddr_in hint;
     struct sockaddr_in address;
-    int addrlen=sizeof(address);
+    int addrlen = sizeof(address);
     int opt = 1;
     int port=5555;
     char buffer[1024] = {0};
@@ -31,10 +31,11 @@ int main(){
         return -1;
     }
 
-    hint.sin_family=AF_INET;   //IPv4
-    hint.sin_addr.s_addr=inet_addr("127.0.0.1");  
-    hint.sin_port = htons(port); //htons keeps the port big enddian  i think the opposite is ntohs()
-      /* ( Big-endian is an order in which the big end -- the most significant value in the sequence -- is first, 
+    hint.sin_family = AF_INET;   //IPv4
+    hint.sin_addr.s_addr = inet_addr("127.0.0.1");  
+    hint.sin_port = htons(port); 
+    //htons keeps the port big enddian  i think the opposite is ntohs()
+    /* ( Big-endian is an order in which the big end -- the most significant value in the sequence -- is first, 
     at the lowest storage address. 
     Little-endian is an order in which the little end,
     the least significant value in the sequence, is first.)*/
@@ -49,7 +50,7 @@ int main(){
     }
 
 
-    listening=listen(server_fd , 5);
+    listening=listen(server_fd , SOMAXCONN);
     //std::cout<<"listening : "<<listening<<std::endl;
     if(listening < DONE)
     {
@@ -88,7 +89,7 @@ int main(){
 
         // Send the message to the client
         send(client_sock, message.c_str(), message.length(), 0);
-        std::cout << "Message sent: " << message << std::endl;
+        std::cout << "Server > " << message << std::endl;
     }
 
     std::cout << "Server closing..." << std::endl;
